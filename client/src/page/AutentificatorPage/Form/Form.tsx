@@ -1,4 +1,4 @@
-import { ButtonLink } from '../../../component/ButtonLink/ButtonLink';
+import { Button } from '../../../component/Button/Button';
 import { Input } from '../../../component/Input/Input';
 
 export function Form() {
@@ -25,7 +25,7 @@ export function Form() {
         type="checkbox"
         id="remember-me"
       />
-      <ButtonLink path="/user" text="Sign In" />
+      <Button classButton="btn sign-in">Sign In</Button>
     </form>
   );
 }

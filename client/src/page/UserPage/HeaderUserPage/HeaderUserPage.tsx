@@ -2,13 +2,13 @@ import './HeaderUserPage.scss';
 
 import { Button } from '../../../component/Button/Button';
 
-export function HeaderUserPage() {
+export function HeaderUserPage({ name }: { name: string }) {
   return (
     <div className="header">
       <h1>
         Welcome back
         <br />
-        Tony Jarvis!
+        {name}
       </h1>
       <Button classButton="edit-button" text="Edit Name" />
     </div>

@@ -3,16 +3,18 @@ import { Features } from './Features/Features';
 import { Slogan } from './Slogan/Slogan';
 import tree from '../../assets/bank-tree.jpeg';
 import { Header } from '../../component/Header/Header';
-import { NavSignIn } from '../../component/NavSignIn/NavSignIn';
+import React from 'react';
 
 export function HomePage() {
   return (
-    <body>
-      <Header navigation={<NavSignIn />} />
+    <React.Fragment>
+      <Header />
       <main>
-        <Banner condition={<HomePage /> ? <Slogan /> : null} src={tree} />
+        <Banner src={tree}>
+          <Slogan />
+        </Banner>
         <Features />
       </main>
-    </body>
+    </React.Fragment>
   );
 }

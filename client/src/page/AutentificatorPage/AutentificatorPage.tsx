@@ -2,10 +2,14 @@ import { Form } from './Form/Form';
 import './AutentificatorPage.scss';
 import { Header } from '../../component/Header/Header';
 import { NavSignIn } from '../../component/NavSignIn/NavSignIn';
+import React from 'react';
 
 export function AutentificatorPage() {
+  /* if (!token) {
+    return <Form setToken={setToken} />;
+  }*/
   return (
-    <body>
+    <React.Fragment>
       <Header navigation={<NavSignIn />} />
       <main className="main bg-dark">
         <section className="sign-in-content">
@@ -14,6 +18,6 @@ export function AutentificatorPage() {
           <Form />
         </section>
       </main>
-    </body>
+    </React.Fragment>
   );
 }

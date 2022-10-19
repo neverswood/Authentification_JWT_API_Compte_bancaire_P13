@@ -20,7 +20,7 @@ export function TransactionCard({
         <p className="account__content-wrapper__description">{description}</p>
       </div>
       <div className="account__cta">
-        <Button classButton="transaction-button" text="View transactions" />
+        <Button classButton="transaction-button">View transactions</Button>
       </div>
     </section>
   );

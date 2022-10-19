@@ -1,14 +1,18 @@
+import React from 'react';
 import { Header } from '../../component/Header/Header';
 import { NavConnect } from '../../component/NavConnect/NavConnect';
 import { TransactionCard } from '../../component/TransactionCard/TransactionCard';
 import { HeaderUserPage } from './HeaderUserPage/HeaderUserPage';
 
 export function UserPage() {
+  //#todo recuperer le token
+  // utiliser le token pour recuperer les infos auprès de l'api
+  // Injecter les infos dans les composants
   return (
-    <body>
+    <React.Fragment>
       <Header navigation={<NavConnect />} />
       <main className="main bg-dark">
-        <HeaderUserPage />
+        <HeaderUserPage name="name!" />
         <h2 className="sr-only">Accounts</h2>
         <TransactionCard
           title="Argent Bank Checking (x8349)"
@@ -26,6 +30,6 @@ export function UserPage() {
           description="Current Balance"
         />
       </main>
-    </body>
+    </React.Fragment>
   );
 }

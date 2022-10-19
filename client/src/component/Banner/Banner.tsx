@@ -1,15 +1,17 @@
+import { ReactNode } from 'react';
 import './Banner.scss';
 
-type BannerType = {
-  condition: any;
+export function Banner({
+  src,
+  children,
+}: {
   src: string;
-};
-
-export function Banner({ condition, src }: BannerType) {
+  children: ReactNode;
+}) {
   return (
     <div className="hero">
       <img className="hero__banner" src={src} alt="banner"></img>
-      {condition}
+      {children}
     </div>
   );
 }
