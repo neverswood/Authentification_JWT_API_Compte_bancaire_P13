@@ -6,21 +6,29 @@ import './index.scss';
 import { AutentificatorPage } from './page/AutentificatorPage/AutentificatorPage';
 import { HomePage } from './page/HomePage/HomePage';
 import { UserPage } from './page/UserPage/UserPage';
+import { useState } from 'react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-root.render(
-  <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/">
-          <Route index element={<HomePage />} />
-          <Route path="signIn" element={<AutentificatorPage />} />
-          <Route path="user" element={<UserPage />} />
-        </Route>
-      </Routes>
-      <Footer />
-    </Router>
-  </React.StrictMode>
-);
+const App = () => {
+  const [token, setToken] = useState(null);
+  return (
+    <React.StrictMode>
+      <Router>
+        <Routes>
+          <Route path="/">
+            <Route index element={<HomePage />} />
+            <Route
+              path="signIn"
+              element={<AutentificatorPage setToken={setToken} />}
+            />
+            <Route path="user" element={<UserPage />} />
+          </Route>
+        </Routes>
+        <Footer />
+      </Router>
+    </React.StrictMode>
+  );
+};
+root.render(<App />);
