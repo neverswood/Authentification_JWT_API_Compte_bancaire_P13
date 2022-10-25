@@ -7,27 +7,27 @@ import { AutentificatorPage } from './page/AutentificatorPage/AutentificatorPage
 import { HomePage } from './page/HomePage/HomePage';
 import { UserPage } from './page/UserPage/UserPage';
 import { useState } from 'react';
+import { Provider } from 'react-redux';
+import { store } from './Store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 const App = () => {
-  const [token, setToken] = useState(null);
   return (
     <React.StrictMode>
-      <Router>
-        <Routes>
-          <Route path="/">
-            <Route index element={<HomePage />} />
-            <Route
-              path="signIn"
-              element={<AutentificatorPage setToken={setToken} />}
-            />
-            <Route path="user" element={<UserPage />} />
-          </Route>
-        </Routes>
-        <Footer />
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Routes>
+            <Route path="/">
+              <Route index element={<HomePage />} />
+              <Route path="signIn" element={<AutentificatorPage />} />
+              <Route path="profile" element={<UserPage />} />
+            </Route>
+          </Routes>
+          <Footer />
+        </Router>
+      </Provider>
     </React.StrictMode>
   );
 };
