@@ -10,30 +10,33 @@ import { Input } from '../../../component/Input/Input';
 import { InputCheckbox } from '../../../component/InputCheckbox/InputCheckbox';
 import { login } from '../../../service/AuthService';
 import './Form.scss';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../../features/authSlice';
 
-export function Form({ setToken }: { setToken: any }) {
-  const [email, setEmail] = useState<string>('');
+export function Form() {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [remember, setRemember] = useState(false);
+  const [check, setCheck] = useState(false);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await login(email, password);
-      if (remember) {
-        localStorage.setItem('token', JSON.stringify(response.body.token));
-        //toke,n
+      if (check) {
+        localStorage.setItem('token', response.body.token as string);
+        localStorage.setItem('email', email as string);
       }
-      setToken(response.body.token);
-      //#todo rendre le token disponible aux autre composant de l'application
-      // rediriger vers la page de profil
+      localStorage.setItem('token', response.body.token as string);
+      dispatch(setToken(response.body.token));
+      navigate('/profile');
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log('email', email, 'mdp', password);
-  //const log = login().then((response) => console.log(response))
 
   return (
     <form onSubmit={handleSubmit}>
@@ -61,9 +64,9 @@ export function Form({ setToken }: { setToken: any }) {
         labelText="Remember me"
         type="checkbox"
         id="remember-me"
-        checked={remember}
+        checked={check}
         onChange={(e: ChangeEvent<HTMLInputElement>): void => {
-          setRemember(e.target.checked);
+          setCheck(e.target.checked);
         }}
       />
       <Button classButton="btn sign-in">Sign In</Button>

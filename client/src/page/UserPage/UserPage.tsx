@@ -2,17 +2,39 @@ import React from 'react';
 import { Header } from '../../component/Header/Header';
 import { NavConnect } from '../../component/NavConnect/NavConnect';
 import { TransactionCard } from '../../component/TransactionCard/TransactionCard';
+import { getProfile } from '../../service/Auth.service';
 import { HeaderUserPage } from './HeaderUserPage/HeaderUserPage';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setProfile } from '../../features/authSlice';
 
-export function UserPage() {
-  //#todo recuperer le token
-  // utiliser le token pour recuperer les infos auprès de l'api
-  // Injecter les infos dans les composants
+type State = {
+  authentication: {
+    user: string;
+    token: string;
+  };
+};
+
+function RedirectLogin() {
+  const navigate = useNavigate();
+  navigate('/login');
+  return <></>;
+}
+
+function UserPageWithToken({ token, name }: { token: string; name: string }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getProfile(token).then((response) =>
+      dispatch(setProfile(response.firstName))
+    );
+  }, [dispatch, token]);
+
   return (
     <React.Fragment>
       <Header navigation={<NavConnect />} />
       <main className="main bg-dark">
-        <HeaderUserPage name="name!" />
+        <HeaderUserPage name={name} />
         <h2 className="sr-only">Accounts</h2>
         <TransactionCard
           title="Argent Bank Checking (x8349)"
@@ -31,5 +53,16 @@ export function UserPage() {
         />
       </main>
     </React.Fragment>
+  );
+}
+
+export function UserPage() {
+  const token = useSelector((state: State) => state.authentication.token);
+  const user = useSelector((state: State) => state.authentication.user);
+
+  return token === null ? (
+    <RedirectLogin />
+  ) : (
+    <UserPageWithToken token={token} name={user} />
   );
 }

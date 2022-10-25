@@ -2,7 +2,7 @@ import './HeaderUserPage.scss';
 
 import { Button } from '../../../component/Button/Button';
 
-export function HeaderUserPage({ name }: { name: string }) {
+export function HeaderUserPage({ name }: { name: any }) {
   return (
     <div className="header">
       <h1>
