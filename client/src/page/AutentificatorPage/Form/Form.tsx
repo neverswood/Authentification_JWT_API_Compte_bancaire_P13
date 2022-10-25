@@ -13,6 +13,7 @@ import './Form.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../../../features/authSlice';
+import ReactDOM from 'react-dom';
 
 export function Form() {
   const [email, setEmail] = useState('');
@@ -24,16 +25,23 @@ export function Form() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const response = await login(email, password);
+
     try {
-      const response = await login(email, password);
+      const token = response.body.token;
       if (check) {
         localStorage.setItem('token', response.body.token as string);
         localStorage.setItem('email', email as string);
       }
-      localStorage.setItem('token', response.body.token as string);
-      dispatch(setToken(response.body.token));
+
+      localStorage.setItem('token', token as string);
+      dispatch(setToken(token));
       navigate('/profile');
     } catch (error) {
+      if (response.status === 400) {
+        const errorMessage = <p className="error">'Wrong credentials!'</p>;
+        ReactDOM.render(errorMessage, document.getElementById('errorMessage'));
+      }
       console.log(error);
     }
   };
