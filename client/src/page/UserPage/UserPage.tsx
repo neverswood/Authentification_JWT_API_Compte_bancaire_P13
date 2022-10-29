@@ -11,7 +11,10 @@ import { setProfile } from '../../features/authSlice';
 
 type State = {
   authentication: {
-    user: string;
+    user: {
+      firstName: string;
+      lastName: string;
+    };
     token: string;
   };
 };
@@ -22,19 +25,30 @@ function RedirectLogin() {
   return <></>;
 }
 
-function UserPageWithToken({ token, name }: { token: string; name: string }) {
+function UserPageWithToken({
+  token,
+  firstName,
+  lastName,
+}: {
+  token: string;
+  firstName: string;
+  lastName: string;
+}) {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    getProfile(token).then((response) =>
-      dispatch(setProfile(response.firstName))
-    );
+    getProfile(token).then((response) => dispatch(setProfile(response)));
   }, [dispatch, token]);
 
   return (
     <React.Fragment>
       <Header navigation={<NavConnect />} />
       <main className="main bg-dark">
-        <HeaderUserPage name={name} />
+        <HeaderUserPage
+          token={token}
+          firstName={firstName}
+          lastName={lastName}
+        />
         <h2 className="sr-only">Accounts</h2>
         <TransactionCard
           title="Argent Bank Checking (x8349)"
@@ -57,12 +71,16 @@ function UserPageWithToken({ token, name }: { token: string; name: string }) {
 }
 
 export function UserPage() {
-  const token = useSelector((state: State) => state.authentication.token);
+  const token = localStorage.getItem('token');
   const user = useSelector((state: State) => state.authentication.user);
 
   return token === null ? (
     <RedirectLogin />
   ) : (
-    <UserPageWithToken token={token} name={user} />
+    <UserPageWithToken
+      token={token}
+      firstName={user.firstName}
+      lastName={user.lastName}
+    />
   );
 }
