@@ -3,18 +3,8 @@ import './AutentificatorPage.scss';
 import { Header } from '../../component/Header/Header';
 import { NavSignIn } from '../../component/NavSignIn/NavSignIn';
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-type State = {
-  authentication: {
-    user: string;
-    token: string;
-    error: string;
-  };
-};
 export function AutentificatorPage() {
-  const token = useSelector((state: State) => state.authentication.token);
-
   return (
     <React.Fragment>
       <Header navigation={<NavSignIn />} />
