@@ -3,12 +3,17 @@
   margin-bottom: 2rem;
 }
 
-.edit-name-input {
+.edit-name-inputs {
   display: flex;
   justify-content: center;
+}
+
+.edit-name-input {
+  margin: 10px;
   input {
     border-radius: 5px;
     font-size: 17px;
+    background-color: rgb(232, 240, 254);
   }
 }
 
