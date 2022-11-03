@@ -12,7 +12,7 @@ import { login } from '../../../service/AuthService';
 import './Form.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setToken } from '../../../features/authSlice';
+import { setToken, updateCheck } from '../../../features/authSlice';
 import ReactDOM from 'react-dom';
 
 export function Form() {
@@ -29,13 +29,16 @@ export function Form() {
 
     try {
       const token = response.body.token;
+      localStorage.setItem('check', JSON.stringify(check));
+      dispatch(setToken(token));
+
       if (check) {
         localStorage.setItem('token', response.body.token as string);
         localStorage.setItem('email', email as string);
+        dispatch(updateCheck(check));
       }
 
       localStorage.setItem('token', token as string);
-      dispatch(setToken(token));
       navigate('/profile');
     } catch (error) {
       if (response.status === 400) {

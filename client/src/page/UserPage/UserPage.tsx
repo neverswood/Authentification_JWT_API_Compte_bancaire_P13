@@ -1,6 +1,5 @@
 import React from 'react';
 import { Header } from '../../component/Header/Header';
-import { NavConnect } from '../../component/NavConnect/NavConnect';
 import { TransactionCard } from '../../component/TransactionCard/TransactionCard';
 import { getProfile } from '../../service/Auth.service';
 import { HeaderUserPage } from './HeaderUserPage/HeaderUserPage';
@@ -42,7 +41,7 @@ function UserPageWithToken({
 
   return (
     <React.Fragment>
-      <Header navigation={<NavConnect />} />
+      <Header />
       <main className="main bg-dark">
         <HeaderUserPage
           token={token}

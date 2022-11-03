@@ -1,11 +1,17 @@
+import { useSelector } from 'react-redux';
+import { State } from '../../Store';
 import { Logo } from '../Logo/Logo';
+import { NavConnect } from '../NavConnect/NavConnect';
+import { NavSignIn } from '../NavSignIn/NavSignIn';
 import './Header.scss';
 
-export function Header({ navigation }: { navigation: any }) {
+export function Header() {
+  const token = localStorage.getItem('token');
+
   return (
     <nav className="main-nav">
       <Logo />
-      {navigation}
+      {token === null ? <NavSignIn /> : <NavConnect />}
     </nav>
   );
 }
