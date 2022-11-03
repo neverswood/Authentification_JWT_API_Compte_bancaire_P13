@@ -6,7 +6,6 @@ import './index.scss';
 import { AutentificatorPage } from './page/AutentificatorPage/AutentificatorPage';
 import { HomePage } from './page/HomePage/HomePage';
 import { UserPage } from './page/UserPage/UserPage';
-import { useState } from 'react';
 import { Provider } from 'react-redux';
 import { store } from './Store';
 
