@@ -5,7 +5,7 @@ import { HeaderUserPage } from './HeaderUserPage/HeaderUserPage';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setProfile } from '../../features/authSlice';
+import { setProfile } from '../../features/UserSlice';
 import { getProfile } from '../../service/UserService';
 
 type State = {

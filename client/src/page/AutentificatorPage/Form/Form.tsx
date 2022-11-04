@@ -8,12 +8,12 @@ import {
 import { Button } from '../../../component/Button/Button';
 import { Input } from '../../../component/Input/Input';
 import { InputCheckbox } from '../../../component/InputCheckbox/InputCheckbox';
-import { login } from '../../../service/AuthService';
 import './Form.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setToken, updateCheck } from '../../../features/authSlice';
+import { setToken, updateCheck } from '../../../features/AuthenticationSlice';
 import ReactDOM from 'react-dom';
+import { login } from '../../../service/AuthService';
 
 export function Form() {
   const [email, setEmail] = useState('');

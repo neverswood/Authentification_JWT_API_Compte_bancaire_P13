@@ -2,7 +2,7 @@ import './HeaderUserPage.scss';
 import { Button } from '../../../component/Button/Button';
 import { useState } from 'react';
 import { Input } from '../../../component/Input/Input';
-import { setProfile } from '../../../features/authSlice';
+import { setProfile } from '../../../features/UserSlice';
 import { useDispatch } from 'react-redux';
 import { putProfile } from '../../../service/UserService';
 
