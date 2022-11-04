@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Input } from '../../../component/Input/Input';
 import { setProfile } from '../../../features/authSlice';
 import { useDispatch } from 'react-redux';
-import { putProfile } from '../../../service/Auth.service';
+import { putProfile } from '../../../service/UserService';
 
 type UserPage = {
   firstName: string;

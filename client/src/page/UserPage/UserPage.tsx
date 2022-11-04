@@ -1,12 +1,12 @@
 import React from 'react';
 import { Header } from '../../component/Header/Header';
 import { TransactionCard } from '../../component/TransactionCard/TransactionCard';
-import { getProfile } from '../../service/Auth.service';
 import { HeaderUserPage } from './HeaderUserPage/HeaderUserPage';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setProfile } from '../../features/authSlice';
+import { getProfile } from '../../service/UserService';
 
 type State = {
   authentication: {

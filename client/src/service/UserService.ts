@@ -1,3 +1,5 @@
+import UserDataModel from './UserModel';
+
 type DataProfile = {
   body: {
     createdAt: string;
@@ -10,7 +12,7 @@ type DataProfile = {
     status: number;
   };
 };
-export const getProfile = async (token: string) => {
+export const getProfile = async (token: string): Promise<UserDataModel> => {
   const response = await fetch('http://localhost:3001/api/v1/user/profile', {
     method: 'POST',
     headers: {
@@ -22,14 +24,14 @@ export const getProfile = async (token: string) => {
 
   const responseJson = response.json();
   const data: DataProfile = await responseJson;
-  return data.body;
+  return new UserDataModel(data.body);
 };
 
 export const putProfile = async (
   token: string,
   firstName: string,
   lastName: string
-) => {
+): Promise<UserDataModel> => {
   const userData = {
     firstName,
     lastName,
@@ -46,5 +48,5 @@ export const putProfile = async (
 
   const responseJson = response.json();
   const data: DataProfile = await responseJson;
-  return data.body;
+  return new UserDataModel(data.body);
 };
