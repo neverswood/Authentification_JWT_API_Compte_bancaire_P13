@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type initialStateType = {
+type initialStateProps = {
   token: string;
   check: boolean;
 };
 
-const initialState: initialStateType = {
+const initialState: initialStateProps = {
   token: '',
   check: false,
 };

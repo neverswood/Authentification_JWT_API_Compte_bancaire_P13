@@ -6,13 +6,13 @@ import { setProfile } from '../../../features/UserSlice';
 import { useDispatch } from 'react-redux';
 import { putProfile } from '../../../service/UserService';
 
-type UserPage = {
+type UserPageProps = {
   firstName: string;
   lastName: string;
   token: string;
 };
 
-export function HeaderUserPage({ token, firstName, lastName }: UserPage) {
+export function HeaderUserPage({ token, firstName, lastName }: UserPageProps) {
   const dispatch = useDispatch();
 
   const [retrieveFirstName, setRetrieveFirstName] = useState('');

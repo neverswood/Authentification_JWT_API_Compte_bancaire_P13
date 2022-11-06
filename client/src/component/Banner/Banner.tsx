@@ -1,13 +1,12 @@
 import { ReactNode } from 'react';
 import './Banner.scss';
 
-export function Banner({
-  src,
-  children,
-}: {
+type BannerProps = {
   src: string;
   children: ReactNode;
-}) {
+};
+
+export function Banner({ src, children }: BannerProps) {
   return (
     <div className="hero">
       <img className="hero__banner" src={src} alt="banner"></img>

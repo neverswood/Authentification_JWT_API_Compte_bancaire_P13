@@ -7,15 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setProfile } from '../../features/UserSlice';
 import { getProfile } from '../../service/UserService';
+import { State } from '../../Store';
 
-type State = {
-  authentication: {
-    user: {
-      firstName: string;
-      lastName: string;
-    };
-    token: string;
-  };
+type UserPageProps = {
+  token: string;
+  firstName: string;
+  lastName: string;
 };
 
 function RedirectLogin() {
@@ -24,15 +21,7 @@ function RedirectLogin() {
   return <></>;
 }
 
-function UserPageWithToken({
-  token,
-  firstName,
-  lastName,
-}: {
-  token: string;
-  firstName: string;
-  lastName: string;
-}) {
+function UserPageWithToken({ token, firstName, lastName }: UserPageProps) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -71,7 +60,7 @@ function UserPageWithToken({
 
 export function UserPage() {
   const token = localStorage.getItem('token');
-  const user = useSelector((state: State) => state.authentication.user);
+  const user = useSelector((state: State) => state.user);
 
   return token === null ? (
     <RedirectLogin />

@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler } from 'react';
 
-type InputType = {
+type InputProps = {
   inputName: string;
   labelFor: string;
   labelText: string;
@@ -18,7 +18,7 @@ export function InputCheckbox({
   id,
   checked,
   onChange,
-}: InputType) {
+}: InputProps) {
   return (
     <React.Fragment>
       <div className={inputName}>

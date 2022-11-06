@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type initialStateType = {
+type initialStateProps = {
   user: object;
 };
 
-const initialState: initialStateType = {
+const initialState: initialStateProps = {
   user: {},
 };
 
