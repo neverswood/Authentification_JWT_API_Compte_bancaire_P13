@@ -59,7 +59,7 @@ function UserPageWithToken({ token, firstName, lastName }: UserPageProps) {
 }
 
 export function UserPage() {
-  const token = localStorage.getItem('token');
+  const token = useSelector((state: State) => state.authentication.token);
   const firstName = useSelector((state: State) => state.user.firstName);
   const lastName = useSelector((state: State) => state.user.lastName);
 

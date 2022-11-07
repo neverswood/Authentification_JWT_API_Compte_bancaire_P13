@@ -30,15 +30,10 @@ export function Form() {
     try {
       const token = response.body.token;
       localStorage.setItem('check', JSON.stringify(check));
+      localStorage.setItem('token', response.body.token as string);
+      localStorage.setItem('email', email as string);
+      dispatch(updateCheck(check));
       dispatch(setToken(token));
-
-      if (check) {
-        localStorage.setItem('token', response.body.token as string);
-        localStorage.setItem('email', email as string);
-        dispatch(updateCheck(check));
-      }
-
-      localStorage.setItem('token', token as string);
       navigate('/profile');
     } catch (error) {
       if (response.status === 400) {

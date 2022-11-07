@@ -1,17 +1,12 @@
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/argentBankLogo.png';
-import { State } from '../../Store';
 import { Button } from '../Button/Button';
 import './Logo.scss';
 
 export function Logo() {
   const navigate = useNavigate();
-  const check = useSelector((state: State) => state.authentication.check);
+
   const redirect = () => {
-    if (!check) {
-      localStorage.clear();
-    }
     navigate('/');
   };
   return (
