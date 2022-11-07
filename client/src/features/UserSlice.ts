@@ -1,19 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type initialStateProps = {
-  user: object;
+type InitialStateProps = {
+  firstName: string;
+  lastName: string;
 };
 
-const initialState: initialStateProps = {
-  user: {},
+const initialState: InitialStateProps = {
+  firstName: '',
+  lastName: '',
 };
 
 export const userSlice = createSlice({
-  name: 'authentication',
+  name: 'user',
   initialState,
   reducers: {
     setProfile: (state, action) => {
-      state.user = action.payload;
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
     },
   },
 });
