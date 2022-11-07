@@ -6,12 +6,12 @@ import { NavSignIn } from '../NavSignIn/NavSignIn';
 import './Header.scss';
 
 export function Header() {
-  const token = localStorage.getItem('token');
+  const token = useSelector((state: State) => state.authentication.token);
 
   return (
     <nav className="main-nav">
       <Logo />
-      {token === null ? <NavSignIn /> : <NavConnect />}
+      {token === '' ? <NavSignIn /> : <NavConnect />}
     </nav>
   );
 }
