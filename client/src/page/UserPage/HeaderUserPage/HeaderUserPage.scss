@@ -3,10 +3,24 @@
   margin-bottom: 2rem;
 }
 
-.edit-button {
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-  font-weight: bold;
+.edit-name-inputs {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-name-input {
+  margin: 10px;
+  input {
+    border-radius: 5px;
+    font-size: 17px;
+    background-color: rgb(232, 240, 254);
+  }
+}
+
+.edit-name-change__save,
+.edit-name-change__cancel,
+.edit {
   padding: 10px;
+  margin: 0 10px;
+  width: 100px;
 }

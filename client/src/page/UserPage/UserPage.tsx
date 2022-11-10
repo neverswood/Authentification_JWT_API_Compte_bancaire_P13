@@ -1,14 +1,42 @@
+import React from 'react';
 import { Header } from '../../component/Header/Header';
-import { NavConnect } from '../../component/NavConnect/NavConnect';
 import { TransactionCard } from '../../component/TransactionCard/TransactionCard';
 import { HeaderUserPage } from './HeaderUserPage/HeaderUserPage';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setProfile } from '../../features/UserSlice';
+import { getProfile } from '../../service/UserService';
+import { State } from '../../Store';
 
-export function UserPage() {
+type UserPageProps = {
+  token: string;
+  firstName: string;
+  lastName: string;
+};
+
+function RedirectLogin() {
+  const navigate = useNavigate();
+  navigate('/login');
+  return <></>;
+}
+
+function UserPageWithToken({ token, firstName, lastName }: UserPageProps) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getProfile(token).then((response) => dispatch(setProfile(response)));
+  }, [dispatch, token]);
+
   return (
-    <body>
-      <Header navigation={<NavConnect />} />
+    <React.Fragment>
+      <Header />
       <main className="main bg-dark">
-        <HeaderUserPage />
+        <HeaderUserPage
+          token={token}
+          firstName={firstName}
+          lastName={lastName}
+        />
         <h2 className="sr-only">Accounts</h2>
         <TransactionCard
           title="Argent Bank Checking (x8349)"
@@ -26,6 +54,22 @@ export function UserPage() {
           description="Current Balance"
         />
       </main>
-    </body>
+    </React.Fragment>
+  );
+}
+
+export function UserPage() {
+  const token = useSelector((state: State) => state.authentication.token);
+  const firstName = useSelector((state: State) => state.user.firstName);
+  const lastName = useSelector((state: State) => state.user.lastName);
+
+  return token === null ? (
+    <RedirectLogin />
+  ) : (
+    <UserPageWithToken
+      token={token}
+      firstName={firstName}
+      lastName={lastName}
+    />
   );
 }

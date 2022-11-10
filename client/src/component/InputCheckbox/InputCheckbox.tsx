@@ -6,24 +6,24 @@ type InputProps = {
   labelText: string;
   type: string;
   id: string;
-  value: string;
+  checked: boolean;
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-export function Input({
+export function InputCheckbox({
   inputName,
   labelFor,
   labelText,
   type,
   id,
-  value,
+  checked,
   onChange,
 }: InputProps) {
   return (
     <React.Fragment>
       <div className={inputName}>
+        <input type={type} id={id} checked={checked} onChange={onChange} />
         <label htmlFor={labelFor}>{labelText}</label>
-        <input type={type} id={id} value={value} onChange={onChange} />
       </div>
     </React.Fragment>
   );

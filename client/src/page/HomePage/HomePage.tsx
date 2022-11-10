@@ -3,16 +3,29 @@ import { Features } from './Features/Features';
 import { Slogan } from './Slogan/Slogan';
 import tree from '../../assets/bank-tree.jpeg';
 import { Header } from '../../component/Header/Header';
-import { NavSignIn } from '../../component/NavSignIn/NavSignIn';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../features/AuthenticationSlice';
 
 export function HomePage() {
+  const dispatch = useDispatch();
+  const check = localStorage.getItem('check');
+
+  if (check === 'true') {
+    dispatch(setToken(localStorage.getItem('token')));
+  } else {
+    dispatch(setToken(''));
+  }
+
   return (
-    <body>
-      <Header navigation={<NavSignIn />} />
+    <React.Fragment>
+      <Header />
       <main>
-        <Banner condition={<HomePage /> ? <Slogan /> : null} src={tree} />
+        <Banner src={tree}>
+          <Slogan />
+        </Banner>
         <Features />
       </main>
-    </body>
+    </React.Fragment>
   );
 }

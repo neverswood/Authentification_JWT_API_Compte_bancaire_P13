@@ -1,13 +1,18 @@
 import './FeatureItem.scss';
 
-type FeatureItemType = {
+type FeatureItemProps = {
   src: string;
   alt: string;
   title: string;
   description: string;
 };
 
-export function FeatureItem({ src, alt, title, description }: FeatureItemType) {
+export function FeatureItem({
+  src,
+  alt,
+  title,
+  description,
+}: FeatureItemProps) {
   return (
     <div className="feature-item">
       <img src={src} alt={alt} className="feature-item__icon" />

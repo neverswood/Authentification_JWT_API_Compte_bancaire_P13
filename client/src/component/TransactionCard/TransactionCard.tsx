@@ -1,7 +1,7 @@
 import { Button } from '../Button/Button';
 import './TransactionCard.scss';
 
-type TransactionCardType = {
+type TransactionCardProps = {
   title: string;
   amount: string;
   description: string;
@@ -11,7 +11,7 @@ export function TransactionCard({
   title,
   amount,
   description,
-}: TransactionCardType) {
+}: TransactionCardProps) {
   return (
     <section className="account">
       <div className="account__content-wrapper">
@@ -20,7 +20,7 @@ export function TransactionCard({
         <p className="account__content-wrapper__description">{description}</p>
       </div>
       <div className="account__cta">
-        <Button classButton="transaction-button" text="View transactions" />
+        <Button classButton="transaction-button">View transactions</Button>
       </div>
     </section>
   );
