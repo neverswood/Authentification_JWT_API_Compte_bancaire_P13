@@ -17,13 +17,23 @@
   }
 }
 
-@media (min-width: 920px) {
+@media screen and (max-width: 599px) {
   .hero-content {
     position: absolute;
-    top: 50px;
-    right: 50px;
-    width: 300px;
-    margin: 2rem;
+    right: 25px;
+    width: 150px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .hero-content {
+    position: absolute;
+    right: 25px;
+  }
+}
+
+@media screen and (min-width: 920px) {
+  .hero-content {
     .hero-content__subtitle {
       font-size: 1.5rem;
     }

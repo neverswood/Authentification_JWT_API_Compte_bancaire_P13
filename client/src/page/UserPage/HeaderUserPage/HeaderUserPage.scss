@@ -24,3 +24,9 @@
   margin: 0 10px;
   width: 100px;
 }
+
+@media screen and (max-width: 599px) {
+  .edit-name-inputs {
+    flex-direction: column;
+  }
+}
