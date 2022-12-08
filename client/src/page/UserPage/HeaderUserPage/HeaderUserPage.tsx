@@ -18,21 +18,23 @@ export function HeaderUserPage({ token, firstName, lastName }: UserPageProps) {
   const [retrieveFirstName, setRetrieveFirstName] = useState('');
   const [retrieveLastName, setRetrieveLastName] = useState('');
   const [isShown, setIsShown] = useState(true);
-  localStorage.setItem('firstName', firstName as string);
-  localStorage.setItem('lastName', lastName as string);
 
   const editName = () => {
     setIsShown((current) => !current);
   };
 
-  const saveEventButton = async () => {
-    const data = await putProfile(token, retrieveFirstName, retrieveLastName);
-    dispatch(
-      setProfile({ firstName: data.firstName, lastName: data.lastName })
-    );
-    localStorage.setItem('firstName', retrieveFirstName as string);
-    localStorage.setItem('lastName', retrieveLastName as string);
-
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (retrieveFirstName === '' && retrieveLastName === '') {
+      setIsShown((current) => current);
+    } else {
+      const data = await putProfile(token, retrieveFirstName, retrieveLastName);
+      dispatch(
+        setProfile({ firstName: data.firstName, lastName: data.lastName })
+      );
+      localStorage.setItem('firstName', retrieveFirstName as string);
+      localStorage.setItem('lastName', retrieveLastName as string);
+    }
     setIsShown((current) => !current);
   };
 
@@ -44,7 +46,11 @@ export function HeaderUserPage({ token, firstName, lastName }: UserPageProps) {
     <div className="header">
       <div style={{ display: isShown ? 'none' : 'block' }}>
         <h1>Edit your name</h1>
-        <div className="edit-name-inputs">
+        <form
+          className="edit-name-inputs"
+          name="formEditName"
+          onSubmit={handleSubmit}
+        >
           <Input
             placeHolder="your first name"
             inputName="edit-name-input input-wrapper"
@@ -53,7 +59,9 @@ export function HeaderUserPage({ token, firstName, lastName }: UserPageProps) {
             type="firstName"
             id="firstName"
             value={retrieveFirstName}
-            onChange={(e) => setRetrieveFirstName(e.target.value)}
+            onChange={(e) => {
+              setRetrieveFirstName(e.target.value);
+            }}
           />
           <Input
             placeHolder="your last name"
@@ -65,14 +73,9 @@ export function HeaderUserPage({ token, firstName, lastName }: UserPageProps) {
             value={retrieveLastName}
             onChange={(e) => setRetrieveLastName(e.target.value)}
           />
-        </div>
+          <Button classButton="btn edit-name-change__save">save</Button>
+        </form>
         <div className="edit-name-change">
-          <Button
-            classButton="btn edit-name-change__save"
-            click={saveEventButton}
-          >
-            save
-          </Button>
           <Button
             classButton="btn edit-name-change__cancel"
             click={cancelEventButton}

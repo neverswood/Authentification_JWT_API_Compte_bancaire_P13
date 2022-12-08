@@ -15,6 +15,9 @@ export function UserPage() {
   const token = useSelector((state: State) => state.authentication.token);
   const firstName = useSelector((state: State) => state.user.firstName);
   const lastName = useSelector((state: State) => state.user.lastName);
+  if (token === '') {
+    localStorage.clear();
+  }
 
   useEffect(() => {
     getProfile(token).then((response) => dispatch(setProfile(response)));

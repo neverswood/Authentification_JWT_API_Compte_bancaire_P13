@@ -1,10 +1,16 @@
 import { Form } from './Form/Form';
 import './AutentificatorPage.scss';
 import { Header } from '../../component/Header/Header';
-import { NavSignIn } from '../../component/NavSignIn/NavSignIn';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { State } from '../../Store';
 
 export function AutentificatorPage() {
+  const token = useSelector((state: State) => state.authentication.token);
+
+  if (token === '') {
+    localStorage.clear();
+  }
   return (
     <React.Fragment>
       <Header />
