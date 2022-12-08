@@ -305,7 +305,13 @@ definitions:
     properties:
       date:
         type: string
-        description: current month
+        description: transaction date
+      description:
+        type: string
+        description: transaction description
+      amount:
+        type: number
+        description: transaction amount
   ApiResponse:
     type: object
     properties:
