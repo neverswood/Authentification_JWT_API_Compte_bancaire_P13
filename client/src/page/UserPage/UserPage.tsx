@@ -9,24 +9,19 @@ import { setProfile } from '../../features/UserSlice';
 import { getProfile } from '../../service/UserService';
 import { State } from '../../Store';
 
-type UserPageProps = {
-  token: string;
-  firstName: string;
-  lastName: string;
-};
-
-function RedirectLogin() {
-  const navigate = useNavigate();
-  navigate('/login');
-  return <></>;
-}
-
-function UserPageWithToken({ token, firstName, lastName }: UserPageProps) {
+export function UserPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = useSelector((state: State) => state.authentication.token);
+  const firstName = useSelector((state: State) => state.user.firstName);
+  const lastName = useSelector((state: State) => state.user.lastName);
 
   useEffect(() => {
     getProfile(token).then((response) => dispatch(setProfile(response)));
-  }, [dispatch, token]);
+    if (token === '') {
+      navigate('/signIn');
+    }
+  }, [dispatch, navigate, token]);
 
   return (
     <React.Fragment>
@@ -55,21 +50,5 @@ function UserPageWithToken({ token, firstName, lastName }: UserPageProps) {
         />
       </main>
     </React.Fragment>
-  );
-}
-
-export function UserPage() {
-  const token = useSelector((state: State) => state.authentication.token);
-  const firstName = useSelector((state: State) => state.user.firstName);
-  const lastName = useSelector((state: State) => state.user.lastName);
-
-  return token === null ? (
-    <RedirectLogin />
-  ) : (
-    <UserPageWithToken
-      token={token}
-      firstName={firstName}
-      lastName={lastName}
-    />
   );
 }
