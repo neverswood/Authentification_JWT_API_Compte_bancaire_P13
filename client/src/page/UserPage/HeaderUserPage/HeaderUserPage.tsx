@@ -46,6 +46,7 @@ export function HeaderUserPage({ token, firstName, lastName }: UserPageProps) {
         <h1>Edit your name</h1>
         <div className="edit-name-inputs">
           <Input
+            placeHolder="your first name"
             inputName="edit-name-input input-wrapper"
             labelFor="firstName"
             labelText="FirstName"
@@ -55,6 +56,7 @@ export function HeaderUserPage({ token, firstName, lastName }: UserPageProps) {
             onChange={(e) => setRetrieveFirstName(e.target.value)}
           />
           <Input
+            placeHolder="your last name"
             inputName="edit-name-input input-wrapper"
             labelFor="lastName"
             labelText="LastName"

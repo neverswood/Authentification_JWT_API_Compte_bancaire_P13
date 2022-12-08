@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler } from 'react';
 
 type InputProps = {
+  placeHolder: string;
   inputName: string;
   labelFor: string;
   labelText: string;
@@ -11,6 +12,7 @@ type InputProps = {
 };
 
 export function Input({
+  placeHolder,
   inputName,
   labelFor,
   labelText,
@@ -23,7 +25,13 @@ export function Input({
     <React.Fragment>
       <div className={inputName}>
         <label htmlFor={labelFor}>{labelText}</label>
-        <input type={type} id={id} value={value} onChange={onChange} />
+        <input
+          type={type}
+          id={id}
+          value={value}
+          placeholder={placeHolder}
+          onChange={onChange}
+        />
       </div>
     </React.Fragment>
   );

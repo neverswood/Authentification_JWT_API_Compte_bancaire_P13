@@ -47,6 +47,7 @@ export function Form() {
   return (
     <form onSubmit={handleSubmit}>
       <Input
+        placeHolder="your name"
         inputName="input-wrapper"
         labelFor="username"
         labelText="Username"
@@ -56,6 +57,7 @@ export function Form() {
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
+        placeHolder="your password"
         inputName="input-wrapper"
         labelFor="password"
         labelText="Password"
